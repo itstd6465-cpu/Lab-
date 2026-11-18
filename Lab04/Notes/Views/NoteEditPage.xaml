@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Notes.Views.NoteEditPage"
+             Title="Edit note">
+    <ScrollView>
+        <Grid Padding="16" RowSpacing="8" ColumnSpacing="12"
+              ColumnDefinitions="*,*" RowDefinitions="Auto,Auto,Auto,Auto,Auto">
+            <Label Text="Title" Grid.ColumnSpan="2" />
+            <Entry x:Name="TitleEntry" Grid.Row="1" Grid.ColumnSpan="2" Placeholder="Title" />
+            <Label Text="Body" Grid.Row="2" Grid.ColumnSpan="2" />
+            <Editor x:Name="BodyEditor" Grid.Row="3" Grid.ColumnSpan="2"
+                    Placeholder="Body" AutoSize="TextChanges" MinimumHeightRequest="120" />
+            <Button Grid.Row="4" Text="Save" Clicked="OnSaveClicked" />
+            <Button Grid.Row="4" Grid.Column="1" Text="Cancel" Clicked="OnCancelClicked" />
+        </Grid>
+    </ScrollView>
+</ContentPage>

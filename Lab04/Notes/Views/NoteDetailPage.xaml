@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Notes.Views.NoteDetailPage"
+             Title="Note">
+    <ScrollView>
+        <Grid Padding="16" RowSpacing="12" RowDefinitions="Auto,Auto,Auto">
+            <Label x:Name="TitleLabel" FontSize="24" FontAttributes="Bold"
+                   SemanticProperties.HeadingLevel="Level1" />
+            <Label x:Name="BodyLabel" Grid.Row="1" />
+            <Button x:Name="EditButton" Grid.Row="2" Text="Edit" Clicked="OnEditClicked" />
+        </Grid>
+    </ScrollView>
+</ContentPage>

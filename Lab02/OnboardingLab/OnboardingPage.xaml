@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:OnboardingLab"
+             x:Class="OnboardingLab.OnboardingPage"
+             x:DataType="local:OnboardingViewModel"
+             Title="Onboarding">
+    <ScrollView>
+        <Grid Padding="24" RowSpacing="8"
+              RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto">
+            <!-- Row 0: navigation state, shown to the user -->
+            <Label Text="{Binding StepTitle}" FontSize="14" />
+
+            <!-- Step 1: welcome -->
+            <Label Grid.Row="1" IsVisible="{Binding IsStep1}"
+                   Text="Welcome" FontSize="28" FontAttributes="Bold" />
+            <Label Grid.Row="2" IsVisible="{Binding IsStep1}"
+                   Text="We need your name and city to set up your account. Tap Next." />
+
+            <!-- Step 2: the form (UI state) -->
+            <Label Grid.Row="1" IsVisible="{Binding IsStep2}" Text="Name" />
+            <Entry Grid.Row="2" IsVisible="{Binding IsStep2}"
+                   Text="{Binding Name}" Placeholder="Your name" />
+            <Label Grid.Row="3" IsVisible="{Binding IsStep2}" Text="City" />
+            <Entry Grid.Row="4" IsVisible="{Binding IsStep2}"
+                   Text="{Binding City}" Placeholder="Your city" />
+
+            <!-- Step 3: confirm -->
+            <Label Grid.Row="1" IsVisible="{Binding IsStep3}"
+                   Text="Check your details" FontSize="22" FontAttributes="Bold" />
+            <Label Grid.Row="2" IsVisible="{Binding IsStep3}" Text="{Binding Summary}" />
+
+            <!-- Row 5: Back / Next -->
+            <Grid Grid.Row="5" ColumnDefinitions="*,*" ColumnSpacing="12" Margin="0,16,0,0">
+                <Button Text="Back" IsEnabled="{Binding CanGoBack}" Clicked="OnBackClicked" />
+                <Button Grid.Column="1" Text="{Binding NextText}" Clicked="OnNextClicked" />
+            </Grid>
+
+            <Label Grid.Row="6" Text="{Binding Status}" />
+
+            <!-- Row 7: a test hook used in Part C (T4). -->
+            <Button Grid.Row="7" Margin="0,32,0,0"
+                    Text="Test T4: store a version 0 snapshot and quit"
+                    FontSize="12" BackgroundColor="Gray"
+                    Clicked="OnStoreOldSnapshotClicked" />
+        </Grid>
+    </ScrollView>
+</ContentPage>

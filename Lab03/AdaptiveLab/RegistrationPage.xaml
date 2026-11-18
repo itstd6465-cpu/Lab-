@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AdaptiveLab.RegistrationPage"
+             Title="Register">
+    <!-- One child only: the form. Never put a long list in here (see Week 9). -->
+    <ScrollView>
+        <Grid x:Name="Form"
+              Padding="16"
+              ColumnSpacing="16"
+              RowSpacing="8"
+              ColumnDefinitions="*"
+              RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto">
+
+            <VisualStateManager.VisualStateGroups>
+                <VisualStateGroup x:Name="WidthStates">
+                    <!-- Narrow must exist: it is the state the page returns to. -->
+                    <VisualState x:Name="Narrow">
+                        <VisualState.StateTriggers>
+                            <AdaptiveTrigger MinWindowWidth="0" />
+                        </VisualState.StateTriggers>
+                    </VisualState>
+                    <VisualState x:Name="Wide">
+                        <VisualState.StateTriggers>
+                            <AdaptiveTrigger MinWindowWidth="700" />
+                        </VisualState.StateTriggers>
+                        <VisualState.Setters>
+                            <!-- The Grid itself -->
+                            <Setter Property="ColumnDefinitions" Value="*,*" />
+                            <Setter Property="RowDefinitions" Value="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto" />
+                            <Setter TargetName="Heading" Property="Grid.ColumnSpan" Value="2" />
+                            <!-- Email moves up beside Name -->
+                            <Setter TargetName="EmailLabel" Property="Grid.Row" Value="1" />
+                            <Setter TargetName="EmailLabel" Property="Grid.Column" Value="1" />
+                            <Setter TargetName="EmailEntry" Property="Grid.Row" Value="2" />
+                            <Setter TargetName="EmailEntry" Property="Grid.Column" Value="1" />
+                            <!-- Password and Confirm share rows 3–4 -->
+                            <Setter TargetName="PasswordLabel" Property="Grid.Row" Value="3" />
+                            <Setter TargetName="PasswordEntry" Property="Grid.Row" Value="4" />
+                            <Setter TargetName="ShowPasswordButton" Property="Grid.Row" Value="4" />
+                            <Setter TargetName="ConfirmLabel" Property="Grid.Row" Value="3" />
+                            <Setter TargetName="ConfirmLabel" Property="Grid.Column" Value="1" />
+                            <Setter TargetName="ConfirmEntry" Property="Grid.Row" Value="4" />
+                            <Setter TargetName="ConfirmEntry" Property="Grid.Column" Value="1" />
+                            <!-- Everything below spans both columns -->
+                            <Setter TargetName="TermsCheckBox" Property="Grid.Row" Value="5" />
+                            <Setter TargetName="TermsLabel" Property="Grid.Row" Value="5" />
+                            <Setter TargetName="TermsLabel" Property="Grid.ColumnSpan" Value="2" />
+                            <Setter TargetName="CreateButton" Property="Grid.Row" Value="6" />
+                            <Setter TargetName="CreateButton" Property="Grid.ColumnSpan" Value="2" />
+                            <Setter TargetName="StatusLabel" Property="Grid.Row" Value="7" />
+                            <Setter TargetName="StatusLabel" Property="Grid.ColumnSpan" Value="2" />
+                        </VisualState.Setters>
+                    </VisualState>
+                </VisualStateGroup>
+            </VisualStateManager.VisualStateGroups>
+
+            <!-- Row 0 -->
+            <Label x:Name="Heading"
+                   Text="Create account"
+                   FontSize="28"
+                   FontAttributes="Bold"
+                   Margin="0,0,0,8"
+                   SemanticProperties.HeadingLevel="Level1" />
+
+            <!-- Rows 1–2 -->
+            <Label x:Name="NameLabel" Grid.Row="1" Text="Full name" />
+            <Entry x:Name="NameEntry" Grid.Row="2"
+                   Placeholder="Full name" ReturnType="Next" />
+
+            <!-- Rows 3–4 -->
+            <Label x:Name="EmailLabel" Grid.Row="3" Text="Email" />
+            <Entry x:Name="EmailEntry" Grid.Row="4"
+                   Placeholder="name@example.com" Keyboard="Email" ReturnType="Next" />
+
+            <!-- Rows 5–6: the eye button shares the password cell, so no nested layout is needed -->
+            <Label x:Name="PasswordLabel" Grid.Row="5" Text="Password" />
+            <Entry x:Name="PasswordEntry" Grid.Row="6"
+                   Placeholder="At least 8 characters" IsPassword="True"
+                   Margin="0,0,52,0" />
+            <ImageButton x:Name="ShowPasswordButton" Grid.Row="6"
+                         Source="eye.png"
+                         HorizontalOptions="End" VerticalOptions="Center"
+                         Padding="12" BackgroundColor="Transparent"
+                         MinimumWidthRequest="48"
+                         MinimumHeightRequest="48"
+                         SemanticProperties.Description="Show password"
+                         SemanticProperties.Hint="Shows or hides the password text"
+                         Clicked="OnShowPasswordClicked" />
+
+            <!-- Rows 7–8 -->
+            <Label x:Name="ConfirmLabel" Grid.Row="7" Text="Confirm password" />
+            <Entry x:Name="ConfirmEntry" Grid.Row="8"
+                   Placeholder="Repeat the password" IsPassword="True" />
+
+            <!-- Row 9: check box and its text share one cell -->
+            <CheckBox x:Name="TermsCheckBox" Grid.Row="9"
+                      HorizontalOptions="Start" VerticalOptions="Center"
+                      SemanticProperties.Description="I accept the terms of use" />
+            <Label x:Name="TermsLabel" Grid.Row="9"
+                   Text="I accept the terms of use"
+                   Margin="48,0,0,0" VerticalOptions="Center"
+                   AutomationProperties.IsInAccessibleTree="False">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnTermsTapped" />
+                </Label.GestureRecognizers>
+            </Label>
+
+            <!-- Rows 10–11 -->
+            <Button x:Name="CreateButton" Grid.Row="10"
+                    Text="Create account" Margin="0,16,0,0"
+                    Clicked="OnCreateClicked" />
+            <Label x:Name="StatusLabel" Grid.Row="11" />
+        </Grid>
+    </ScrollView>
+</ContentPage>

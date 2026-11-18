@@ -1,11 +1,12 @@
 # Build outputs
-bin/
-obj/
+**/bin/
+**/obj/
 
 # User-specific files
-.vs/
+**/.vs/
 *.user
 *.suo
 
 # OS-generated files
 .DS_Store
+Thumbs.db
