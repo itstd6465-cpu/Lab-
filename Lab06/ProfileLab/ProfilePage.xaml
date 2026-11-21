@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:ProfileLab.ViewModels;assembly=Profile.Core"
+             x:Class="ProfileLab.ProfilePage"
+             x:DataType="vm:ProfileViewModel"
+             Title="Profile">
+    <ScrollView>
+        <Grid Padding="16" RowSpacing="8"
+              RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto">
+            <Label Text="{Binding DisplayText}"
+                   FontSize="28" FontAttributes="Bold"
+                   SemanticProperties.HeadingLevel="Level1" />
+
+            <Label Grid.Row="1" Text="Name" />
+            <Entry Grid.Row="2"
+                   Text="{Binding Name, Mode=TwoWay}"
+                   Placeholder="Your name" ReturnType="Next" />
+            <!-- An empty Label takes no height, so the form does not jump when there is no error -->
+            <Label Grid.Row="3"
+                   Text="{Binding NameError}"
+                   TextColor="{AppThemeBinding Light=#B00020, Dark=#FF8A80}" />
+
+            <Label Grid.Row="4" Text="Email" />
+            <Entry Grid.Row="5"
+                   Text="{Binding Email, Mode=TwoWay}"
+                   Placeholder="name@example.com" Keyboard="Email" />
+            <Label Grid.Row="6"
+                   Text="{Binding EmailError}"
+                   TextColor="{AppThemeBinding Light=#B00020, Dark=#FF8A80}" />
+
+            <Button Grid.Row="7" Text="Save" Margin="0,16,0,0"
+                    Command="{Binding SaveCommand}" />
+            <Button Grid.Row="8" Text="Reload saved profile"
+                    Command="{Binding LoadCommand}" />
+
+            <ActivityIndicator Grid.Row="9"
+                               IsRunning="{Binding SaveCommand.IsRunning}"
+                               IsVisible="{Binding SaveCommand.IsRunning}" />
+
+            <Label Grid.Row="10" Text="{Binding StatusMessage}" />
+        </Grid>
+    </ScrollView>
+</ContentPage>
